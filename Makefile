@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 NAME = minishell
-FILES = minishell.c ft_split.c additional.c additional1.c export_and_unset.c
+FILES = minishell.c ft_split.c additional.c additional1.c export_and_unset.c ft_execvp.c ft_strjoin.c
 OBJECT = $(FILES:.c=.o)
 
 all : $(NAME)
