@@ -6,7 +6,7 @@
 /*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:13:56 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/17 11:13:26 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/20 08:30:58 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,44 @@ int is_builtin(char *cmd)
 }
 
 
-void    execute_commind_line(t_input *list)
+void    execute_commind_line(t_command **list)
 {
-    t_input *temp;
+    t_command *temp;
 
-    temp = list;
-    while (list)
+    temp = *list;
+    
+    while(list)
     {
-        printf("value: %s\n", list->value);
-        printf("type: %d\n", list->type);
-        list = list->next;
+        printf("Command: %s\n", (*list)->cmd);
+        printf("Arguments: ");
+        for (int i = 0; (*list)->args[i] != NULL; i++)
+            printf("%s ", (*list)->args[i]);
+        printf("\n");
+        printf("Input redirection: ");
+        t_redir *redir = (*list)->inoutfile;
+        while (redir)
+        {
+            printf("%s    ", redir->filename);
+            printf("Type: %d    ", redir->type);
+            redir = redir->next;
+        }
+        printf("\n");
+        *list = (*list)->next;
     }
-    if (is_builtin(temp->value) == 1)
-        printf("khsny ncode lamr\n");
-    else
-        printf("ghady nsft l execve\n");
+    // int i = 0;
+    // while (*list != NULL)
+    // {
+    //     free((*list)->cmd);
+    //     while ((*list)->args[i] != NULL)
+    //     {
+    //         free((*list)->args[i]);
+    //         i++;
+    //     }
+    //     free((*list)->inoutfile->filename);
+    //     *list = (*list)->next;
+    // }
+    // if (is_builtin(temp->value) == 1)
+    //     printf("khsny ncode lamr\n");
+    // else
+    //     printf("ghady nsft l execve\n");
 }

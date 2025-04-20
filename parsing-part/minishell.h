@@ -6,7 +6,7 @@
 /*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:36 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/12 12:22:37 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:28:38 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ typedef struct s_input
 	struct s_input	*next;
 }					t_input;
 
-void				execute_commind_line(t_input *list);
+typedef struct s_redir
+{
+    char *filename;
+    int   type; // 0 = input, 1 = output, 2 = append, 3 = heredoc
+    struct s_redir *next;
+} t_redir;
+
+typedef struct s_command
+{
+	char    *cmd;       // "cat"
+    char    **args;      // {"file.txt", NULL}
+    t_redir *inoutfile;     // لائحة ديال ملفات input (input أو heredoc)
+    struct s_command *next;
+} t_command;
+
+void				execute_commind_line(t_command **list);
 
 #endif

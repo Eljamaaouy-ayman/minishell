@@ -6,7 +6,7 @@
 /*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:12 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/18 15:36:38 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/20 08:30:20 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,125 @@ void    list_input(char **input, t_input **list)
     }
 }
 
+char **put_the_args(t_input *list, char *cmd)
+{
+    char **args;
+    int i = 0;
+    int j = 0;
+    t_input *tmp;
+    t_input *tmp2;
+    
+    tmp = list;
+    while (strcmp(tmp->value, cmd) != 0)
+        tmp = tmp->next;
+    tmp = tmp->next;
+    tmp2 = tmp;
+    while(tmp2 != NULL && tmp2->type != PIPE)
+    {
+        i++;
+        tmp2 = tmp2->next;
+    }
+    args = (char **)malloc(sizeof(char *) * (i + 1));
+    if (args == NULL)
+        return (NULL);
+    while (tmp != NULL && tmp->type != PIPE)
+    {
+        args[j] = ft_strdup(tmp->value);
+        j++;
+        tmp = tmp->next;
+    }
+    args[j] = NULL;
+    return (args);
+}
+
+int what_direction(char *str)
+{
+    if (strcmp(str, "<") == 0)
+        return 0; // input
+    else if (strcmp(str, ">") == 0)
+        return 1; // output
+    else if (strcmp(str, ">>") == 0)
+        return 2; // append
+    else if (strcmp(str, "<<") == 0)
+        return 3; // heredoc
+    return -1; // unknown
+}
+
+t_redir *check_derctions(char **args)
+{
+    int i = 0;
+    t_redir *redir = NULL;
+    
+    while (args[i] != NULL)
+    {
+        if (strcmp(args[i], "<") == 0 || strcmp(args[i], ">") == 0 || strcmp(args[i], ">>") == 0 || strcmp(args[i], "<<") == 0)
+        {
+            t_redir *new_redir = (t_redir *)malloc(sizeof(t_redir));
+            new_redir->filename = ft_strdup(args[i + 1]);
+            new_redir->type = what_direction(args[i]);
+            if (redir == NULL)
+            {
+                redir = new_redir;
+                redir->next = NULL;
+            }
+            else
+            {
+                t_redir *tmp = redir;
+                while (tmp->next != NULL)
+                    tmp = tmp->next;
+                tmp->next = new_redir;
+                new_redir->next = NULL;
+            }
+            // i++;
+        }
+        i++;
+    }
+    return redir;
+}
+
+
+void    list_command(t_input **list, t_command **cmd_list)
+{    
+    while(*list != NULL)
+    {
+        t_command *new_cmd = (t_command *)malloc(sizeof(t_command));
+        new_cmd->cmd = ft_strdup((*list)->value);
+        new_cmd->args = put_the_args(*list, (*list)->value);
+        new_cmd->inoutfile = check_derctions(new_cmd->args);
+        new_cmd->next = NULL;
+        if (*cmd_list == NULL)
+            *cmd_list = new_cmd;
+        else
+        {
+            t_command *tmp = *cmd_list;
+            while (tmp->next != NULL)
+                tmp = tmp->next;
+            tmp->next = new_cmd;
+        }
+        t_input *tmp = *list;
+        while (*list != NULL && (*list)->type != PIPE)
+        {
+            tmp = *list;
+            *list = (*list)->next;
+            free(tmp->value);
+            free(tmp);
+        }
+        if (*list && (*list)->type == PIPE)
+        {
+            tmp = *list;
+            *list = (*list)->next;
+            free(tmp->value);
+            free(tmp);
+        }
+    }
+}
+
 int main()
 {
     pid_t pid;
     const char *prompt = "minishell$ ";
     char *line;
+    t_command *cmd_list = NULL;
 
     while (1)
     {
@@ -81,12 +195,13 @@ int main()
             char **input = ft_split(line);
             t_input *list = NULL;
             list_input(input, &list);
+            list_command(&list, &cmd_list);
             // Execute the command
             pid = fork();  // Create a child process
             if (pid == 0)
             {
                 // In child process: Execute the command
-                execute_commind_line(list);
+                execute_commind_line(&cmd_list);
                 exit(1);  // Exit child process if exec fails
             }
             else
@@ -95,7 +210,7 @@ int main()
                 wait(NULL);
             }
         }
-
+        cmd_list = NULL;
         free(line);  // Free the allocated memory for the line
     }
 
