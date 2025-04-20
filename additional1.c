@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   additional1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 12:23:38 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/01 12:54:49 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/04/19 10:15:26 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ char *ft_strndup(const char *s, size_t n)
         len++;
     dup = malloc(len + 1);
     if (!dup)
+	{
         return NULL;
+	}
 	len = 0;
     while (len < n && s[len])
 	{

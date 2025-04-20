@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:23:34 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/09 01:36:28 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/04/19 10:47:35 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #include <readline/history.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <sys/wait.h>
+
 
 int	    ft_strcmp(const char *s1, const char *s2);
 char	**ft_split(char const *s, char c);
@@ -33,11 +35,11 @@ char	*ft_strchr(const char *s, int c);
 int	    ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strrchr(const char *s, int c);
-char *ft_strndup(const char *s, size_t n);
-void ft_unset(char **args, char ***env);
-void ft_export(char **args, char ***env);
+char    *ft_strndup(const char *s, size_t n);
+void    ft_unset(char **args, char ***env);
+void    ft_export(char **args, char ***env);
 char	*ft_strjoin(char const *s1, char const *s2);
-int execve_like_execvp(const char *file, char *const argv[]);
+int     execve_like_execvp(const char *file, char *const argv[]);
 
 
 #endif
