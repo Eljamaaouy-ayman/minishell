@@ -181,9 +181,8 @@ void    list_command(t_input **list, t_command **cmd_list)
     }
 }
 
-int main(int ac, char **av, char **env)
+int main()
 {
-    pid_t pid;
     char *line;
     t_command *cmd_list = NULL;
 

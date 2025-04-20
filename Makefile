@@ -6,7 +6,7 @@ FILES = exection_part/minishell.c exection_part/ft_split.c exection_part/additio
 		parsing-part/execute.c parsing-part/minishell.c
 OBJECT = $(FILES:.c=.o)
 
-all : $(NAME)
+all : $(NAME) clean
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

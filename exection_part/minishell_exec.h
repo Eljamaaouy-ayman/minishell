@@ -27,10 +27,11 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include "../parsing-part/minishell.h"
+#include "../parsing-part/libft/libft.h"
 
 
 int	    ft_strcmp(const char *s1, const char *s2);
-char	**ft_split(char const *s, char c);
+char	**ft_split1(char const *s, char c);
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
 int	    ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -41,7 +42,8 @@ void    ft_unset(char **args, char ***env);
 void    ft_export(char **args, char ***env);
 char	*ft_strjoin(char const *s1, char const *s2);
 int     execve_like_execvp(const char *file, char *const argv[]);
-void    exection(t_command *cmd_list);
+struct s_command;
+void    exection(struct s_command *cmd_list);
 
 
 #endif

@@ -23,7 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-#include "../exection_part/minishell_exec.h"
+// #include "../exection_part/minishell_exec.h"
 
 typedef enum e_input_type
 {
@@ -59,6 +59,7 @@ typedef struct s_command
 } t_command;
 
 void				execute_commind_line(t_command **list);
+int	ft_strcmp(const char *s1, const char *s2);
 void    exection(t_command *cmd_list);
 
 #endif

@@ -10,25 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-char	*ft_strrchr(const char *s, int c)
-{
-	size_t	i;
-	char	b;
-
-	i = ft_strlen(s);
-	b = (unsigned char)c;
-	if (b == '\0')
-		return ((char *)(s + i));
-	while (i > 0)
-	{
-		if (s[i - 1] == b)
-			return ((char *)(s + i -1));
-		i--;
-	}
-	return (NULL);
-}
+#include "minishell_exec.h"
 
 char *ft_strndup(const char *s, size_t n)
 {

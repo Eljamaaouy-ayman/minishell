@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 
-#include "minishell.h"
+#include "minishell_exec.h"
+
 static void	ftstrlcpy(const char *src, char *dst, int c)
 {
 	int	i;
@@ -92,7 +93,7 @@ static int	fill(char **s1, const char *s, char c)
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split1(char const *s, char c)
 {
 	int		words;
 	char	**s1;

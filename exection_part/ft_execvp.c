@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "minishell_exec.h"
 
 int is_executable(const char *path)
 {
@@ -26,7 +26,7 @@ char* search_path(const char *file)
         return NULL;
     char *path_copy = ft_strdup(path);
     char *full_path = NULL;
-    char **dir = ft_split(path_copy, ':');
+    char **dir = ft_split1(path_copy, ':');
     while(dir[i])
     {
         full_path = malloc(ft_strlen(dir[i]) + ft_strlen(file) + 2);
@@ -60,7 +60,7 @@ int execve_like_execvp(const char *file, char *const argv[])
         return -1;
     }
     char *path_copy = ft_strdup(path);
-    char **environ = ft_split(path_copy, ':');
+    char **environ = ft_split1(path_copy, ':');
     if (ft_strchr(file, '/'))
         return execve(file, argv, environ);
     full_path = search_path(file);
