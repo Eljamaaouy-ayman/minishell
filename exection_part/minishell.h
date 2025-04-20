@@ -26,6 +26,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <sys/wait.h>
+#include "../parsing-part/minishell.h"
 
 
 int	    ft_strcmp(const char *s1, const char *s2);
@@ -40,6 +41,7 @@ void    ft_unset(char **args, char ***env);
 void    ft_export(char **args, char ***env);
 char	*ft_strjoin(char const *s1, char const *s2);
 int     execve_like_execvp(const char *file, char *const argv[]);
+void    exection(t_command *cmd_list):
 
 
 #endif

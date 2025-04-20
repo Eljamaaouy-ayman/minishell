@@ -12,16 +12,6 @@
 
 
 #include "minishell.h"
-void printbanner(void)
-{
-    printf("███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ██╗\n"
-"████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██║\n"  
-"██╔████╔██║ ╚████╔╝     ███████╗███████║█████╗  ██║     ██║\n"
-"██║╚██╔╝██║  ╚██╔╝      ╚════██║██╔══██║██╔══╝  ██║     ██║\n"
-"██║ ╚═╝ ██║   ██║       ███████║██║  ██║███████╗███████╗███████╗\n"
-"╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n");
-}
-
 
 void getworkingdir()
 {
@@ -103,19 +93,9 @@ void ft_cd(char **cmdlist)
     
 }
 
-int main(int argc, char **argv, char **env)
+void    exection(t_command *cmd_list)
 {
-    (void)argc;
-    (void)argv;
-    char *line;
-    char **cmdlist;
-    printbanner();
-    while((line = readline("$>")) != NULL && ft_strcmp(line, "exit") != 0)
-    {
-        if(*line)
-            add_history(line);
-        // printf("%s\n", line);
-        cmdlist = ft_split(line, ' ');
+    
         if(ft_strcmp(line, "pwd") == 0)
             getworkingdir();
         else if(ft_strcmp(line, "env") == 0)
@@ -132,8 +112,6 @@ int main(int argc, char **argv, char **env)
             shell_luncher(cmdlist);
         }
         free(line);
-    }
-
 
 
         // for (int i = 0; i < history_length; i++) {

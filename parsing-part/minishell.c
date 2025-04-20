@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+void printbanner(void)
+{
+    printf("███╗   ███╗██╗   ██╗    ███████╗██╗  ██╗███████╗██╗     ██╗\n"
+"████╗ ████║╚██╗ ██╔╝    ██╔════╝██║  ██║██╔════╝██║     ██║\n"  
+"██╔████╔██║ ╚████╔╝     ███████╗███████║█████╗  ██║     ██║\n"
+"██║╚██╔╝██║  ╚██╔╝      ╚════██║██╔══██║██╔══╝  ██║     ██║\n"
+"██║ ╚═╝ ██║   ██║       ███████║██║  ██║███████╗███████╗███████╗\n"
+"╚═╝     ╚═╝   ╚═╝       ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝\n");
+}
+
 void    typ_of_input(t_input **new)
 {
     if (ft_strncmp((*new)->value, "|", ft_strlen((*new)->value)) == 0)
@@ -171,16 +181,15 @@ void    list_command(t_input **list, t_command **cmd_list)
     }
 }
 
-int main()
+int main(int ac, char **av, char **env)
 {
     pid_t pid;
-    const char *prompt = "minishell$ ";
     char *line;
     t_command *cmd_list = NULL;
 
-    while (1)
+    printbanner();
+    while((line = readline("minishell$ ")) != NULL && ft_strcmp(line, "exit") != 0)
     {
-        line = readline(prompt);  // Read input from user
         if (line == NULL)
         {
             printf("Exiting...\n");
@@ -196,19 +205,7 @@ int main()
             t_input *list = NULL;
             list_input(input, &list);
             list_command(&list, &cmd_list);
-            // Execute the command
-            pid = fork();  // Create a child process
-            if (pid == 0)
-            {
-                // In child process: Execute the command
-                execute_commind_line(&cmd_list);
-                exit(1);  // Exit child process if exec fails
-            }
-            else
-            {
-                // In parent process: Wait for the child to finish
-                wait(NULL);
-            }
+            exection(cmd_list);
         }
         cmd_list = NULL;
         free(line);  // Free the allocated memory for the line
