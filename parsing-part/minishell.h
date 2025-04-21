@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:36 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/20 20:23:03 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/04/21 06:58:31 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ typedef struct s_command
 
 void				execute_commind_line(t_command **list);
 int	ft_strcmp(const char *s1, const char *s2);
-void    exection(t_command *cmd_list);
+void    exection(t_command *cmd_list, char **env);
 
 #endif

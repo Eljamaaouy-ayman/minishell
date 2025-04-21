@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:12 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/20 20:18:45 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/04/21 08:06:10 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,20 +181,16 @@ void    list_command(t_input **list, t_command **cmd_list)
     }
 }
 
-int main()
+int main(int ac, char **av, char **env)
 {
     char *line;
     t_command *cmd_list = NULL;
+    (void)ac;
+    (void)av;
 
     printbanner();
     while((line = readline("minishell$ ")) != NULL && ft_strcmp(line, "exit") != 0)
     {
-        if (line == NULL)
-        {
-            printf("Exiting...\n");
-            break;
-        }
-
         if (strlen(line) > 0)
         {
             add_history(line);  // Add input to history
@@ -204,8 +200,7 @@ int main()
             t_input *list = NULL;
             list_input(input, &list);
             list_command(&list, &cmd_list);
-            printf("Command: %s\n", cmd_list->cmd);
-            exection(cmd_list);
+            exection(cmd_list, env);
         }
         cmd_list = NULL;
         free(line);  // Free the allocated memory for the line
