@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:24:19 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/19 21:30:43 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/04/20 20:22:06 by eljamaaouya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "minishell.h"
+#include "minishell_exec.h"
 
 void getworkingdir()
 {
@@ -96,27 +96,27 @@ void ft_cd(char **cmdlist)
 void    exection(t_command *cmd_list)
 {
     
-        if(ft_strcmp(line, "pwd") == 0)
-            getworkingdir();
-        else if(ft_strcmp(line, "env") == 0)
-            getenvfunc(env);
-        else if(ft_strcmp(cmdlist[0], "echo") == 0)
-            ft_echo(cmdlist);
-        else if(ft_strcmp(cmdlist[0], "cd") == 0)
-            ft_cd(cmdlist);
-        else if(ft_strcmp(cmdlist[0], "export") == 0)
-            ft_export(cmdlist, &env);
-        else if(ft_strcmp(cmdlist[0], "unset") == 0)
-            ft_unset(cmdlist, &env);
-        else{
-            shell_luncher(cmdlist);
-        }
-        free(line);
+    printf("Executing command: %s\n", cmd_list->cmd);
+        // if(ft_strcmp(line, "pwd") == 0)
+        //     getworkingdir();
+        // else if(ft_strcmp(line, "env") == 0)
+        //     getenvfunc(env);
+        // else if(ft_strcmp(cmdlist[0], "echo") == 0)
+        //     ft_echo(cmdlist);
+        // else if(ft_strcmp(cmdlist[0], "cd") == 0)
+        //     ft_cd(cmdlist);
+        // else if(ft_strcmp(cmdlist[0], "export") == 0)
+        //     ft_export(cmdlist, &env);
+        // else if(ft_strcmp(cmdlist[0], "unset") == 0)
+        //     ft_unset(cmdlist, &env);
+        // else{
+        //     shell_luncher(cmdlist);
+        // }
+        // free(line);
 
 
         // for (int i = 0; i < history_length; i++) {
         //     HIST_ENTRY *entrie = history_get(i + 1);  // Get the history list
         //     printf("%d: %s\n", i + 1, entrie->line);  // Print each history entry
         // }
-    return (0);
 }

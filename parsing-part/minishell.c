@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:12 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/20 08:30:20 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/20 20:18:45 by eljamaaouya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int main(int ac, char **av, char **env)
             t_input *list = NULL;
             list_input(input, &list);
             list_command(&list, &cmd_list);
+            printf("Command: %s\n", cmd_list->cmd);
             exection(cmd_list);
         }
         cmd_list = NULL;

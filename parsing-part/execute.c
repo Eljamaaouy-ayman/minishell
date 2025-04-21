@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 12:13:56 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/20 08:30:58 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/20 14:48:50 by eljamaaouya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void    execute_commind_line(t_command **list)
     t_command *temp;
 
     temp = *list;
+    (void)temp;
     
     while(list)
     {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:36 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/19 18:28:38 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/20 20:23:03 by eljamaaouya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-#include "../exection_part/minishell.h"
+#include "../exection_part/minishell_exec.h"
 
 typedef enum e_input_type
 {
