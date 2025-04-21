@@ -6,7 +6,7 @@
 /*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:12 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/21 09:45:57 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/21 11:02:39 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,8 +189,14 @@ int main(int ac, char **av, char **env)
     (void)av;
 
     printbanner();
-    while((line = readline("minishell$ ")) != NULL && ft_strcmp(line, "exit") != 0)
+    while(1)
     {
+        line = readline("minishell$ ");  // Read input from user
+        if (line == NULL)
+        {
+            printf("Exiting...\n");
+            exit(0);
+        }
         if (strlen(line) > 0)
         {
             add_history(line);  // Add input to history

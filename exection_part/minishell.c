@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:24:19 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/21 10:27:24 by ael-jama         ###   ########.fr       */
+/*   Updated: 2025/04/21 11:03:27 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	exection(t_command *cmd_list, char **env)
 		ft_export(cmd_list->args, &env);
 	else if (ft_strcmp(cmd_list->cmd, "unset") == 0)
 		ft_unset(cmd_list->args, &env);
+	else if (ft_strcmp(cmd_list->cmd, "exit") == 0)
+		exit(0);
 	else
 	{
 		shell_luncher(cmd_list->args);
