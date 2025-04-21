@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:24:19 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/21 10:24:52 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/21 10:27:24 by ael-jama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,19 +104,19 @@ void	exection(t_command *cmd_list, char **env)
 		getworkingdir();
 	else if (ft_strcmp(cmd_list->cmd, "env") == 0)
 		getenvfunc(env);
-	// else if (ft_strcmp(cmd_list->cmd, "echo") == 0)
-	// 	ft_echo(cmd_list->args);
-	// else if (ft_strcmp(cmd_list->cmd, "cd") == 0)
-	// 	ft_cd(cmd_list->args);
-	// else if (ft_strcmp(cmd_list->cmd, "export") == 0)
-	// 	ft_export(cmd_list->args, &env);
-	// else if (ft_strcmp(cmd_list->cmd, "unset") == 0)
-	// 	ft_unset(cmd_list->args, &env);
-	// else
-	// {
-	// 	shell_luncher(cmd_list->args);
-	// }
-	// free(cmd_list->cmd);
+	else if (ft_strcmp(cmd_list->cmd, "echo") == 0)
+		ft_echo(cmd_list->args);
+	else if (ft_strcmp(cmd_list->cmd, "cd") == 0)
+		ft_cd(cmd_list->args);
+	else if (ft_strcmp(cmd_list->cmd, "export") == 0)
+		ft_export(cmd_list->args, &env);
+	else if (ft_strcmp(cmd_list->cmd, "unset") == 0)
+		ft_unset(cmd_list->args, &env);
+	else
+	{
+		shell_luncher(cmd_list->args);
+	}
+	free(cmd_list->cmd);
     
 	// for (int i = 0; i < history_length; i++) {
 	//     HIST_ENTRY *entrie = history_get(i + 1);  // Get the history list
