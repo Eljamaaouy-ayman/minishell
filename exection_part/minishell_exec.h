@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eljamaaouyayman <eljamaaouyayman@studen    +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:23:34 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/20 20:22:14 by eljamaaouya      ###   ########.fr       */
+/*   Updated: 2025/04/21 09:03:30 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    ft_export(char **args, char ***env);
 char	*ft_strjoin(char const *s1, char const *s2);
 int     execve_like_execvp(const char *file, char *const argv[]);
 struct s_command;
-void    exection(struct s_command *cmd_list);
+void    exection(struct s_command *cmd_list, char **env);
 
 
 #endif

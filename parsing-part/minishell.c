@@ -6,7 +6,7 @@
 /*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 18:21:12 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/21 08:06:10 by obarais          ###   ########.fr       */
+/*   Updated: 2025/04/21 09:45:57 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,5 @@ int main(int ac, char **av, char **env)
         cmd_list = NULL;
         free(line);  // Free the allocated memory for the line
     }
-
     return 0;
 }
