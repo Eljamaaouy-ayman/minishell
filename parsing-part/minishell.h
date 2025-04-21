@@ -58,7 +58,6 @@ typedef struct s_command
     struct s_command *next;
 } t_command;
 
-void				execute_commind_line(t_command **list);
 int	ft_strcmp(const char *s1, const char *s2);
 void    exection(t_command *cmd_list, char **env);
 

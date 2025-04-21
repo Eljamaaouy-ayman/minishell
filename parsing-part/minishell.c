@@ -137,7 +137,6 @@ t_redir *check_derctions(char **args)
                 tmp->next = new_redir;
                 new_redir->next = NULL;
             }
-            // i++;
         }
         i++;
     }

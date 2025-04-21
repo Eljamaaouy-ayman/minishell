@@ -35,9 +35,13 @@ static int	ft_count_word(char const *p)
 			k = 1;
 			j++;
 		}
-		if (p[i] == '|' && k == 0)
+		if ((p[i] == '|' || ft_strchr("><", p[i]))&& k == 0)
+		{
+			if (p[i] == p[i + 1])
+				i++;
 			j++;
-		else if (p[i] > 32 && k == 0 && (i == 0 || p[i - 1] <= 32 || p[i - 1] == '|'))
+		}
+		else if (p[i] > 32 && k == 0 && (i == 0 || p[i - 1] <= 32 || p[i - 1] == '|' || ft_strrchr("><", p[i - 1])))
 			j++;
 		i++;
 		if (p[i] == d)
@@ -57,10 +61,18 @@ static char	*ft_alloc_and_cpy(char const *s, size_t *i)
 
 	start = *i;
 	len = 0;
-	if (s[*i] == '|')
+	if (s[*i] == '|' || ft_strrchr("><", s[*i]))
 	{
 		(*i)++;
-		return ("|");
+		if (s[*i - 1] == '|')
+			return ("|");
+		else
+		{
+			if (s[*i] == s[*i - 1])
+				return ((*i)++, ft_substr(s, (*i-2), 2));
+			else
+				return(ft_substr(s, (*i-1), 1));
+		}
 	}
 	if (s[*i] == '"' || s[*i] == '\'')
 	{
@@ -80,7 +92,7 @@ static char	*ft_alloc_and_cpy(char const *s, size_t *i)
 	}
 	else
 	{
-		while (s[*i] != '\0' && s[*i] > 32 && s[*i] != '|')
+		while (s[*i] != '\0' && s[*i] > 32 && s[*i] != '|' && !(ft_strrchr("><", s[*i])))
 		{
 			len++;
 			(*i)++;
