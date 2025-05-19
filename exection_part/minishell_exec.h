@@ -3,47 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 00:23:34 by eljamaaouya       #+#    #+#             */
-/*   Updated: 2025/04/21 09:03:30 by obarais          ###   ########.fr       */
+/*   Updated: 2025/05/18 15:50:56 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef MINISHELL_EXEC_H
 # define MINISHELL_EXEC_H
 
-#include <stdbool.h>
-# include <stdio.h>
+# include "../parsing-part/libft/libft.h"
+# include "../parsing-part/mini_shell.h"
+# include <errno.h>
 # include <limits.h>
-# include <unistd.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <stdbool.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <sys/stat.h>
-#include <errno.h>
-#include <sys/wait.h>
-#include "../parsing-part/minishell.h"
-#include "../parsing-part/libft/libft.h"
+# include <sys/stat.h>
+# include <sys/wait.h>
+# include <unistd.h>
+# include <wait.h>
 
+typedef struct s_env_data
+{
+	char **arr;
+	int *printed;
+}	t_env_data;
 
-int	    ft_strcmp(const char *s1, const char *s2);
+struct	s_command;
+struct	s_list_env;
+struct	s_redir;
+int		ft_strcmp(const char *s1, const char *s2);
 char	**ft_split1(char const *s, char c);
 char	*ft_strdup(const char *s1);
 char	*ft_strchr(const char *s, int c);
-int	    ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strrchr(const char *s, int c);
-char    *ft_strndup(const char *s, size_t n);
-void    ft_unset(char **args, char ***env);
-void    ft_export(char **args, char ***env);
+char	*ft_strndup(const char *s, size_t n);
+void	ft_unset(char **args, char ***env, t_list_env **list);
+void	ft_export(char **args, char **env, t_list_env **list);
 char	*ft_strjoin(char const *s1, char const *s2);
-int     execve_like_execvp(const char *file, char *const argv[]);
-struct s_command;
-void    exection(struct s_command *cmd_list, char **env);
-
+int		execve_like_execvp(const char *file, char **argv, char **env, t_list_env **list_env);
+void	exection(struct s_command *cmd_list, struct s_list_env **env_list);
+char	**list_to_table(t_list_env *list);
+char	*ft_strstr(char *str, char *to_find);
+int		is_redirection(t_command *cmd, t_list_env **env_list, char ***env,
+			char ***env1, char *file);
+void	heredoc_redirection(struct s_command *cmd, t_list_env **env_list,
+			char ***env, char ***env1, char *file);
+void	in_heredoc_redirs(struct s_command *cmd, t_list_env **env_list,
+			char ***env, char ***env1, char *file);
+void	execute_cmd(t_command *cmd_list, t_list_env **env_list, char ***env,
+			char ***env1);
+void	sorte_table(char **arr, int size);
+int		ft_lstsize2(t_list_env *lst);
+void	execute_piped_commands(t_command *cmd, t_list_env **env_list, char ***env,
+			char ***env1);
+char	**list_to_table_export(t_list_env *list);
+t_list_env *ft_getenv(t_list_env **env_list, char *str);
 
 #endif

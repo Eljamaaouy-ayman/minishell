@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-jama <ael-jama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 22:00:18 by obarais           #+#    #+#             */
-/*   Updated: 2025/05/12 11:22:56 by ael-jama         ###   ########.fr       */
+/*   Created: 2025/05/07 12:02:05 by ael-jama          #+#    #+#             */
+/*   Updated: 2025/05/17 19:08:32 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	ch;
 	size_t	i;
 
-	if (!s)
-		return (NULL);
-	ch = (char)c;
 	i = 0;
-	while (s[i] != '\0')
+	if (!s1 && !s2 )
+		return (0);
+	if (!s1 || !s2)
+		return (-1);
+	while (s1[i] || s2[i])
 	{
-		if (s[i] == ch)
-		{
-			return ((char *)&s[i]);
-		}
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 		i++;
 	}
-	if (ch == '\0')
-	{
-		return ((char *)&s[i]);
-	}
-	return (NULL);
+	return (0);
 }

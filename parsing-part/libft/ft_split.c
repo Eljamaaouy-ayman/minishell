@@ -3,116 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: obarais <obarais@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: obarais <obarais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 09:40:55 by obarais           #+#    #+#             */
-/*   Updated: 2025/04/18 17:50:22 by obarais          ###   ########.fr       */
+/*   Updated: 2025/05/08 17:10:51 by obarais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_word(char const *p)
+static int	ft_count_word(char const *p, char c)
 {
 	int	i;
 	int	j;
-	int k;
-	char d = '\0';
 
 	i = 0;
 	j = 0;
-	k = 0;
-	while (p[i] <= 32 && p[i] != '\0')
+	while (p[i] == c && p[i] != '\0')
 		i++;
 	while (p[i] != '\0')
 	{
-		if ((p[i] == '"' || p[i] == '\'') && k == 0)
-		{
-			if (p[i] == '"')
-				d = '"';
-			else
-				d = '\'';
-			k = 1;
-			j++;
-		}
-		if ((p[i] == '|' || ft_strchr("><", p[i]))&& k == 0)
-		{
-			if (p[i] == p[i + 1])
-				i++;
-			j++;
-		}
-		else if (p[i] > 32 && k == 0 && (i == 0 || p[i - 1] <= 32 || p[i - 1] == '|' || ft_strrchr("><", p[i - 1])))
+		if (p[i] != c && (i == 0 || p[i - 1] == c))
 			j++;
 		i++;
-		if (p[i] == d)
-		{
-			k = 0;
-			i++;
-		}
 	}
 	return (j);
 }
 
-static char	*ft_alloc_and_cpy(char const *s, size_t *i)
+static char	*ft_alloc_and_cpy(char const *s, char c, size_t *i)
 {
 	size_t	start;
 	size_t	len;
-	char 	d;
 
 	start = *i;
 	len = 0;
-	if (s[*i] == '|' || ft_strrchr("><", s[*i]))
+	while (s[*i] != '\0' && s[*i] != c)
 	{
-		(*i)++;
-		if (s[*i - 1] == '|')
-			return ("|");
-		else
-		{
-			if (s[*i] == s[*i - 1])
-				return ((*i)++, ft_substr(s, (*i-2), 2));
-			else
-				return(ft_substr(s, (*i-1), 1));
-		}
-	}
-	if (s[*i] == '"' || s[*i] == '\'')
-	{
-		if (s[*i] == '"')
-			d = '"';
-		else
-			d = '\'';
-		(*i)++;
-		len++;
-		while (s[*i] != '\0' && s[*i] != d)
-		{
-			len++;
-			(*i)++;
-		}
 		len++;
 		(*i)++;
-	}
-	else
-	{
-		while (s[*i] != '\0' && s[*i] > 32 && s[*i] != '|' && !(ft_strrchr("><", s[*i])))
-		{
-			len++;
-			(*i)++;
-		}
 	}
 	return (ft_substr(s, start, len));
 }
 
-static char	**ft_free(char **array, size_t j)
-{
-	while (j > 0)
-	{
-		j--;
-		free(array[j]);
-	}
-	free(array);
-	return (NULL);
-}
-
-char	**ft_split(char const *s)
+char	**ft_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	j;
@@ -123,17 +56,17 @@ char	**ft_split(char const *s)
 		return (NULL);
 	i = 0;
 	j = 0;
-	words = ft_count_word(s);
+	words = ft_count_word(s, c);
 	array = (char **)malloc((words + 1) * sizeof(char *));
 	if (array == NULL)
 		return (NULL);
 	while (j < words)
 	{
-		while (s[i] <= 32)
+		while (s[i] == c)
 			i++;
-		array[j] = ft_alloc_and_cpy(s, &i);
+		array[j] = ft_alloc_and_cpy(s, c, &i);
 		if (!array[j])
-			return (ft_free(array, j));
+			return (NULL);
 		j++;
 	}
 	array[j] = NULL;
